@@ -1,41 +1,29 @@
 require 'spec_helper'
 
 describe Fyb do
-  it 'should have a version number' do
-    Fyb::VERSION.should_not be_nil
+  describe 'version' do
+    subject { Fyb::VERSION }
+
+    it { should_not be_nil }
   end
 
-  before :each do
-    Fyb::Configuration.configure do |c|
-      c.currency = :test
-      c.key = '12LsadXoisadfondfd'
-      c.sig = '1245454545'
+  describe BigDecimal do
+    describe '#btc' do
+      subject { BigDecimal('.11111111').btc }
+
+      it { should eq '0.11111111' }
     end
 
-    response = Weary::Response.new('{"ask":3500.00,"bid":3600.00}',
-                                   200,
-                                   'Content-Type' => 'application/json')
-    Fyb.stub_chain(:public, :ticker, :perform).and_return(response)
-  end
+    describe '#money' do
+      subject { BigDecimal('3500').money }
 
-  it 'should use the correct domains' do
-    Fyb::Configuration.currency = :sek
-    Fyb::Configuration.domain.should eq 'https://www.fybse.se/api/SEK/'
+      it { should eq '3500.0' }
+    end
 
-    Fyb::Configuration.currency = :sgd
-    Fyb::Configuration.domain.should eq 'https://www.fybsg.com/api/SGD/'
+    describe '#in_money' do
+      subject { BigDecimal('2.0').in_money(1000) }
 
-    Fyb::Configuration.currency = :test
-    Fyb::Configuration.domain.should eq 'https://fyb.apiary.io/'
-  end
-
-  it 'should have a ticker with ask and bid' do
-    Fyb.ask.should eq 3500.00
-    Fyb.bid.should eq 3600.00
-  end
-
-  it 'should test private api authorization' do
-    p Fyb::Configuration.domain
-    Fyb.test.should be_true
+      it { should eq BigDecimal('2000') }
+    end
   end
 end

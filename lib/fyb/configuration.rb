@@ -1,23 +1,37 @@
 module Fyb
+  # Configuration class that sets the default values if needed. Call this using:
+  #
+  #    Fyb::Configuration.configure do |config|
+  #      config.currency = :sek
+  #      config.key = 'your-fyb-key'
+  #      config.sig = 'your-fyb-secret'
+  #    end
   module Configuration
-    extend self
+    module_function
 
-    attr_accessor :key, :sig, :currency
+    class << self
+      attr_accessor :key, :sig, :currency
 
-    APIS = {
-      :sek => 'https://www.fybse.se/api/SEK/',
-      :sgd => 'https://www.fybsg.com/api/SGD/',
-      :test => 'https://fyb.apiary.io/'
-    }
+      APIS = {
+        sek: 'https://www.fybse.se/api/SEK/',
+        sgd: 'https://www.fybsg.com/api/SGD/',
+        test: 'https://fyb.apiary.io/'
+      }
 
-    def domain
-      return APIS[:sek] if self.currency == nil
+      def currency
+        @currency ||= :sek
+        @currency
+      end
 
-      APIS[self.currency]
-    end
+      def domain
+        return APIS[:sek] if currency.nil?
 
-    def configure
-      yield self
+        APIS[currency]
+      end
+
+      def configure
+        yield self
+      end
     end
   end
 end

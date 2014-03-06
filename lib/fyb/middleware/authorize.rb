@@ -2,6 +2,7 @@ require 'hmac-sha1'
 
 module Fyb
   module Middleware
+    # Adds the key and secret signature to the weary request
     class Authorize
       def initialize(app)
         @app = app

@@ -1,14 +1,24 @@
 module Fyb
   module API
+    # ==== The private API
+    #
+    # You can use this directly instead of Fyb::Client if you want.
+    #
+    # ==== Examples
+    #
+    #   body = Fyb.private.test.perform.parse
+    #
+    #   order = Fyb.private.placeorder(:qty => 1.5, :price => 100, 'B').perform.parse
     class Private < Weary::Client
+      use Middleware::Timestamper
       use Middleware::Authorize
       use Middleware::Parser
 
       domain Fyb::Configuration.domain
       headers 'Content-Type' => 'application/x-www-form-urlencoded'
 
-      required :timestamp
-      defaults :timestamp => Time.now.to_i
+      # This is a hack to let the RACK middleware add a timestamp.
+      optional :timestamp
 
       post :test, 'test'
       post :getaccinfo, 'getaccinfo'

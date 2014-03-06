@@ -31,6 +31,8 @@ $ fyb --sgd
 TODO: FIX THIS
 ```
 
+Please look in the source code for documentation or generate rdocs.
+
 A short example follows:
 
 ```ruby
@@ -50,17 +52,18 @@ end
 Fyb.test # => returns true if authorized
 
 # you can either place an order by doing
-order = Fyb.sell! 0.11, Fybse.bid # creates an Order object and performs it
+order = Fyb.sell! 0.11, Fyb.bid # creates an Order object and performs it
+# you can also use the market price
+order = Fyb.buy! 0.11, :market
+
 order.cancel! if order.pending?
 
 # or by creating the order and then performing it on your own
-order = Fyb::Order.new 0.11, Fybse.ask, :buy
+order = Fyb::Order.new 0.11, Fyb.ask, :buy
 order.perform.cancel!
 
 p order
 # =>
-
-order.cancel! # => if the order is still pending it will be cancelled
 ```
 
 ## Contributing
