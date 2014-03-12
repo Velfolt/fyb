@@ -7,7 +7,7 @@ require 'optparse'
 require 'fyb'
 
 opt_parser = OptionParser.new do |opt|
-  opt.banner = "Usage: fyb [OPTIONS]"
+  opt.banner = 'Usage: fyb [OPTIONS]'
 
   opt.on('-s', '--sek', 'swedish crown') do
     Fyb::Configuration.currency = :sek
@@ -17,7 +17,7 @@ opt_parser = OptionParser.new do |opt|
     Fyb::Configuration.currency = :sgd
   end
 
-  opt.on("-h","--help","help") do
+  opt.on('-h', '--help', 'help') do
     puts opt_parser
   end
 end
