@@ -9,7 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Henrik Lundberg"]
   spec.email         = ["velfolt@gmail.com"]
   spec.summary       = %q{FYB v1 API implementation}
-  spec.homepage      = ""
+  spec.description   = %q{FYB v1 API implementation for easy access}
+  spec.homepage      = "https://github.com/Velfolt/fyb"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
