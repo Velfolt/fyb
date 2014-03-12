@@ -28,7 +28,7 @@ $ fyb --sek
 Bid: 3690.54 Ask: 3870.21
 
 $ fyb --sgd
-TODO: FIX THIS
+Bid: 3690.54 Ask: 3870.21 # the api currently returns the wrong currency
 ```
 
 Please look in the source code for documentation or generate rdocs.
@@ -61,9 +61,6 @@ order.cancel! if order.pending?
 # or by creating the order and then performing it on your own
 order = Fyb::Order.new 0.11, Fyb.ask, :buy
 order.perform.cancel!
-
-p order
-# =>
 ```
 
 ## Contributing

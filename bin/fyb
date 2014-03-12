@@ -2,6 +2,26 @@
 
 lib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+require 'optparse'
 require 'fyb'
 
-puts "Bid: #{Fyb.bid} Ask: #{Fyb.ask}"
+opt_parser = OptionParser.new do |opt|
+  opt.banner = "Usage: fyb [OPTIONS]"
+
+  opt.on('-s', '--sek', 'swedish crown') do
+    Fyb::Configuration.currency = :sek
+  end
+
+  opt.on('-g', '--sgd', 'singapore dollar') do
+    Fyb::Configuration.currency = :sgd
+  end
+
+  opt.on("-h","--help","help") do
+    puts opt_parser
+  end
+end
+
+opt_parser.parse!
+
+puts "Bid: #{Fyb.bid.money} Ask: #{Fyb.ask.money}"
