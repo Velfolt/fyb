@@ -1,5 +1,7 @@
 # Fyb
 
+[![Build Status](https://travis-ci.org/Velfolt/fyb.png?branch=master)](https://travis-ci.org/Velfolt/fyb)
+
 FYB API v1 implementation.
 
 ## Installation
