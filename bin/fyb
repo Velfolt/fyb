@@ -9,11 +9,11 @@ require 'fyb'
 opt_parser = OptionParser.new do |opt|
   opt.banner = 'Usage: fyb [OPTIONS]'
 
-  opt.on('-s', '--sek', 'swedish crown') do
+  opt.on('--sek', 'swedish crown') do
     Fyb::Configuration.currency = :sek
   end
 
-  opt.on('-g', '--sgd', 'singapore dollar') do
+  opt.on('--sgd', 'singapore dollar') do
     Fyb::Configuration.currency = :sgd
   end
 
