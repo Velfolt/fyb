@@ -1,3 +1,11 @@
 language: ruby
 rvm:
-  - 2.1.0
+- 2.1.0
+deploy:
+  provider: rubygems
+  api_key:
+    secure: JHTIU6ZFjwIRU2cXRrlQ9AhrHMUxtMQbRSfKeNyF+P/9DinCFpu5t6mlROPv53oQ2DspjiK0WT0w0rQ/65BtRw/Yg8lbhviyhKdLRauBI5Gjs26iNObeHqT+YmsYOJ81Rbfylk3Ue5aNXFD438xsiY79oduIkXr006DzgH5ktjI=
+  gem: fyb
+  on:
+    tags: true
+    repo: Velfolt/fyb
