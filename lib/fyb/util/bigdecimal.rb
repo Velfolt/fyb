@@ -17,4 +17,12 @@ class BigDecimal
 
     self * BigDecimal(price)
   end
+
+  # Returns a BigDecimal with the money amount converted into bitcoin for +price+
+  def in_btc(price)
+    price = Fyb.ask if price == :ask
+    price = Fyb.bid if price == :bid
+
+    self / BigDecimal(price)
+  end
 end

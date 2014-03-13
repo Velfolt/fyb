@@ -25,5 +25,11 @@ describe Fyb do
 
       it { should eq BigDecimal('2000') }
     end
+
+    describe '#in_btc' do
+      subject { BigDecimal('2000').in_btc(1000) }
+
+      it { should eq BigDecimal('2') }
+    end
   end
 end
